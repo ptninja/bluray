@@ -71,7 +71,7 @@ CW="${bold}${baihongse} ERROR ${jiacu}";ZY="${baihongse}${bold} ATTENTION ${jiac
 # --------------------------------------------------------------------------------
 BDDATE=2020.03.29
 BDVER=3.0.7
-DeBUG=0
+DeBUG=1
 # --------------------------------------------------------------------------------
 using_bdinfo=new
 sstn=No
@@ -156,7 +156,7 @@ function _check_install(){
 # 检查必要软件是否齐全
 function _check_install_2(){
     # vcs montage identify
-    for apps in ffmpeg mono mktorrent convert bash getopt cut nconvert bc expr ; do
+    for apps in ffmpeg mono mktorrent bash getopt cut nconvert bc expr ; do
         app_name=$apps ; _check_install
     done
     rm -rf tmpmissingapp
@@ -208,9 +208,13 @@ function _install_nconvert() {
 function _install_bdinfo() {
     if [[ ! -f /etc/abox/app/BDinfoCli.0.7.3/BDInfo.exe ]]; then
         mkdir -p /etc/abox/app
-        cd /etc/abox/app
-        svn co https://github.com/Aniverse/bluray/trunk/tools/BDinfoCli.0.7.3
-        mv -f BDinfoCli.0.7.3 BDinfoCli
+	git clone -n --depth=1 --filter=tree:0 https://github.com/ptninja/bluray /etc/abox/app/tmp-bluray
+	cd /etc/abox/app/tmp-bluray
+	git sparse-checkout set --no-cone tools/BDinfoCli.0.7.3
+	git checkout
+	mv tools/BDinfoCli.0.7.3 /etc/abox/app
+	cd /etc/abox/app
+	rm -rf tmp-bluray
     fi
     if [[ ! -f /etc/abox/app/bdinfocli.exe ]]; then
         wget https://github.com/Aniverse/bluray/raw/master/tools/bdinfocli.exe -qO /etc/abox/app/bdinfocli.exe
@@ -292,7 +296,7 @@ function _intro() {
                                  installresponce=0 && echo -e "${baihongse}${bold}ERROR${normal}${bold} You DONOT have ROOT privilege${normal}\n"
                              else
                                  apt-get install -y mono-complete mktorrent bc # imagemagick
-                                 [[ ! $( command -v ffmpeg   ) ]] && _install_ffmpeg
+                                 [[ ! $( command -v ffmpeg   ) ]] && _install_ffmpeg_2
                                  # [[ ! $( command -v vcs      ) ]] && _install_vcs
                                  [[ ! $( command -v nconvert ) ]] && _install_nconvert
                                  _install_bdinfo ; installdone=1 ; appmissing=No ; _check_install_2
