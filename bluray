@@ -53,9 +53,10 @@ RCLONEPATH="Replace:/here/with/your/remote/path"
 #
 #
 usage() {
-bash <(wget -qO- https://git.io/bluray) -u
-bash <(curl -s https://raw.githubusercontent.com/Aniverse/bluray/master/bluray)
-wget -qO /usr/local/bin/bluray https://git.io/bluray && chmod +x /usr/local/bin/bluray
+SCRIPTFILE=https://raw.githubusercontent.com/ptninja/bluray/master/bluray
+bash <(wget -qO- $SCRIPTFILE) -u
+bash <(curl -s $SCRIPTFILE)
+wget -qO /usr/local/bin/bluray $SCRIPTFILE && chmod +x /usr/local/bin/bluray
 }
 # --------------------------------------------------------------------------------
 black=$(tput setaf 0); red=$(tput setaf 1); green=$(tput setaf 2); yellow=$(tput setaf 3);
