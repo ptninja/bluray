@@ -53,10 +53,10 @@ RCLONEPATH="Replace:/here/with/your/remote/path"
 #
 #
 usage() {
-SCRIPTFILE=https://raw.githubusercontent.com/ptninja/bluray/master/bluray
-bash <(wget -qO- $SCRIPTFILE) -u
-bash <(curl -s $SCRIPTFILE)
-wget -qO /usr/local/bin/bluray $SCRIPTFILE && chmod +x /usr/local/bin/bluray
+SCRIPT_URL=https://raw.githubusercontent.com/ptninja/bluray/master/bluray
+bash <(wget -qO- $SCRIPT_URL) -u
+bash <(curl -s $SCRIPT_URL)
+wget -qO /usr/local/bin/bluray $SCRIPT_URL && chmod +x /usr/local/bin/bluray
 }
 # --------------------------------------------------------------------------------
 black=$(tput setaf 0); red=$(tput setaf 1); green=$(tput setaf 2); yellow=$(tput setaf 3);
@@ -1043,7 +1043,7 @@ function _end() {
 if [[ $do_upgrade == 1 ]] && [[ $EUID == 0 ]]; then
     _logo
     echo -e "Installing latest script ... "
-    wget -qO /usr/local/bin/bluray https://git.io/bluray && chmod +x /usr/local/bin/bluray && echo -e "${green}DONE${normal}\n"
+    wget -qO /usr/local/bin/bluray $SCRIPT_URL && chmod +x /usr/local/bin/bluray && echo -e "${green}DONE${normal}\n"
     exit 0
 fi
 

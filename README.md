@@ -9,7 +9,7 @@
 
 Dedicated Server or VPS with root privilege  
 ```
-bash <(wget -qO- https://git.io/bluray) -u
+bash <(wget -qO- https://raw.githubusercontent.com/ptninja/bluray/master/bluray) -u
 ```
 
 Shared seedbox with SSH access  
