@@ -52,8 +52,8 @@ RCLONEPATH="Replace:/here/with/your/remote/path"
 #
 #
 #
-usage() {
 SCRIPT_URL=https://raw.githubusercontent.com/ptninja/bluray/master/bluray
+usage() {
 bash <(wget -qO- $SCRIPT_URL) -u
 bash <(curl -s $SCRIPT_URL)
 wget -qO /usr/local/bin/bluray $SCRIPT_URL && chmod +x /usr/local/bin/bluray
